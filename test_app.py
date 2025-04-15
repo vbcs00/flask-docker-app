@@ -12,7 +12,7 @@ def test_about():
     assert response.status_code == 200
     assert b"About Us" in response.data
 
-def test_greet()
+def test_greet():
     tester = app.test_client()
     response = tester.get("/greet/Alice")
     assert response.status_code == 200
