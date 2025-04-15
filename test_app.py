@@ -21,4 +21,4 @@ def test_greet():
 def test_404():
     tester = app.test_client()
     response = tester.get ("/nonexistent")
-    assert response.status_code = 404
+    assert response.status_code == 404
