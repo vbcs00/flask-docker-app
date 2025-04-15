@@ -26,7 +26,9 @@ jobs:
           python -m pip install pytest
 
       - name: Run Tests
-        run: pytest
+        run: |
+           export PYTHONPATH=.
+           python -m pytest -v test_app.py
 
       - name: Set up Docker
         uses: docker/setup-buildx-action@v3
