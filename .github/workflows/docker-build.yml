@@ -10,28 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Checkout code
-     - uses: actions/checkout@v3
+    - name: Checkout code
+    - uses: actions/checkout@v3
 
-     - name: Set up Python
-     - uses: actions/setup-python@v4
-       with:
-         python-version: '3.9'
+    - name: Set up Python
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
 
-     - name: Install dependencies
+    - name: Install dependencies
+      run: |
+       python -m pip install --upgrade pip
+       pip install -r requirements.txt
+
+    - name: Run Test (Host Python)
+      run: |
+       export PYTHONPATH=.
+       python -m pytest -v
+
+     - name: Setup Docker
+       uses: docker/setup-buildx-action@v3
+
+     - name: Test Inside Docker Container
        run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-     - name: Run Test (Host Python)
-       run: |
-        export PYTHONPATH=.
-        python -m pytest -v
-
-      - name: Setup Docker
-        uses: docker/setup-buildx-action@v3
-
-      - name: Test Inside Docker Container
-        run: |
-          docker build -t flast-test-app
-          docker run --rm flask-test-app pytest
+         docker build -t flast-test-app
+         docker run --rm flask-test-app pytest
