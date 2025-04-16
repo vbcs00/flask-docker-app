@@ -4,7 +4,7 @@ def test_homepage():
     tester = app.test_client()
     response = tester.get("/")
     assert response.status_code == 200
-    assert b"Hello, World!" in response.data
+    assert b"Hello Dockerized Flask App!" in response.data
 
 def test_about():
     tester = app.test_client()
