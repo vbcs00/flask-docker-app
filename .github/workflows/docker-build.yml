@@ -15,7 +15,7 @@ jobs:
      - name: Set up Python
      - uses: actions/setup-python@v4
        with:
-          python-version: '3.9'
+         python-version: '3.9'
 
 
      - name: Install dependencies
@@ -25,13 +25,13 @@ jobs:
 
      - name: Run Test (Host Python)
        run: |
-         export PYTHONPATH=.
-         python -m pytest -v
+        export PYTHONPATH=.
+        python -m pytest -v
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v3
 
       - name: Test Inside Docker Container
-        run : |
+        run: |
           docker build -t flast-test-app
           docker run --rm flask-test-app pytest
